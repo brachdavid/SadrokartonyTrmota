@@ -1,9 +1,14 @@
 ﻿@inherits LayoutComponentBase
 
-@Body
+<header class="sticky-top">
+    <NavMenu @rendermode="InteractiveServer" />
+</header>
 
-<div id="blazor-error-ui">
-    An unhandled error has occurred.
-    <a href="" class="reload">Reload</a>
-    <a class="dismiss">🗙</a>
+<div class="d-flex flex-column min-vh-100">
+    <!-- Hlavní obsah stránky -->
+    <main class="flex-grow-1">
+        @Body
+    </main>
+
+    <Footer @rendermode="InteractiveServer" />
 </div>
