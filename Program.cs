@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SadrokartonyTrmota.Components;
 using SadrokartonyTrmota.Components.Account;
 using SadrokartonyTrmota.Data;
+using System.Security.Cryptography;
 
 namespace SadrokartonyTrmota
 {
@@ -59,6 +60,26 @@ namespace SadrokartonyTrmota
 
             app.UseStaticFiles();
             app.UseAntiforgery();
+
+            // Middleware pro generování nonce a pøidání CSP hlavièky
+            app.Use(async (context, next) =>
+            {
+                var nonce = Convert.ToBase64String(RandomNumberGenerator.GetBytes(16));
+                context.Items["CSPNonce"] = nonce;
+
+                context.Response.Headers.Append("Content-Security-Policy",
+                    $"default-src 'self'; " +
+                    $"script-src 'self' 'nonce-{nonce}'; " +
+                    $"style-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; " +
+                    $"img-src 'self' data: https://www.firmy.cz https://toplist.cz; " +
+                    $"connect-src 'self'; " +
+                    $"font-src 'self' https://cdn.jsdelivr.net; " +
+                    $"frame-src 'self' https://maps.google.com https://www.google.com; " +
+                    $"object-src 'none'; " +
+                    $"base-uri 'self';");
+
+                await next();
+            });
 
             app.MapRazorComponents<App>()
                 .AddInteractiveServerRenderMode();
