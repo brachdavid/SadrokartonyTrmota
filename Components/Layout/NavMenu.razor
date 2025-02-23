@@ -1,1 +1,81 @@
-﻿
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3 p-lg-2 bg-opacity-75 navbar-custom position-fixed z-3 w-100 top-0">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="/" @onclick="@(async () => NavigationManager.NavigateTo("/", forceLoad: true))">
+            <img src="/images/brand/logoST.png" alt="logo" class="logo" loading="lazy" />
+            <span class="d-none d-md-block px-md-3">Sádrokartony Trmota</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" @onclick="ToggleMenu" aria-controls="navbarNav" aria-expanded="@IsMenuOpen" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse @(IsMenuOpen ? "show" : "")" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center gap-lg-2">
+                <li class="nav-item">
+                    <a class="nav-link" href="#uvod" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Úvod</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#o-mne" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">O mně</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#sluzby" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Služby</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#kontakt" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Kontakt</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#faq" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#galerie" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Galerie</a>
+                </li>
+                <AuthorizeView>
+                    <Authorized>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="/admin" @onclick="@(async () => NavigationManager.NavigateTo("/admin", forceLoad: true))">Admin</NavLink>
+                        </li>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="/odhlaseni" @onclick="@(async () => NavigationManager.NavigateTo("/odhlaseni", forceLoad: true))">Odhlásit</NavLink>
+                        </li>
+                    </Authorized>
+                </AuthorizeView>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<style>    
+    .navbar-custom {
+        backdrop-filter: blur(1px);
+    }
+
+    .logo {
+        height: 4rem;
+    }
+
+    .navbar-nav .nav-link {
+        transition: color 0.3s ease, background-color 0.3s ease;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        .navbar-nav .nav-link:hover {
+            color: #f9d697;
+            text-decoration: none;
+        }
+
+        .navbar-nav .nav-link.active {
+            color: #f9d697;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+</style>
+
+@code {
+    private bool IsMenuOpen = false;
+
+    private void ToggleMenu()
+    {
+        IsMenuOpen = !IsMenuOpen;
+    }
+}
