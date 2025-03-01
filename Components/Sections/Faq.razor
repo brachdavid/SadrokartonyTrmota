@@ -1,5 +1,84 @@
-﻿<h3>Faq</h3>
+﻿<section id="faq" class="px-lg-5 py-4">
+    <div class="container">
+        <h2 class="h1 text-center mb-4">Často kladené dotazy</h2>
+        <div class="accordion" id="faqAccordion">
+            @foreach (var (question, answer) in FAQs)
+            {
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="@($"heading{question.GetHashCode()}")">
+                        <button class="accordion-button collapsed z-1" type="button" data-bs-toggle="collapse"
+                                data-bs-target="@($"#collapse{question.GetHashCode()}")"
+                                aria-expanded="false"
+                                aria-controls="@($"collapse{question.GetHashCode()}")">
+                            @question
+                        </button>
+                    </h2>
+                    <div id="@($"collapse{question.GetHashCode()}")" class="accordion-collapse collapse z-1"
+                         aria-labelledby="@($"heading{question.GetHashCode()}")"
+                         data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            @answer
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<style>
+    /* Výchozí barva zavřené položky (bílá) */
+    .accordion-button {
+        background-color: white !important;
+        color: black !important;
+        border: none; /* Odstranění rámečku */
+    }
+
+        /* Barva otevřené položky (žlutá) */
+        .accordion-button:not(.collapsed) {
+            background-color: #f9d697 !important; /* Žlutá */
+            color: black !important; /* Černý text */
+            box-shadow: none !important; /* Odstranění modrého obrysu */
+        }
+
+    /* Barva těla otevřené položky */
+    .accordion-body {
+        background-color: #fffdf5; /* Světle žlutá */
+        color: black; /* Černý text */
+    }
+
+    /* Odstranění focus outline (modrého obrysu) */
+    .accordion-button:focus {
+        box-shadow: none !important;
+        outline: none !important;
+    }
+</style>
 
 @code {
+    // Data FAQ - otázky a odpovědi
+    private List<(string Question, string Answer)> FAQs = new()
+    {
+        ("Jak dlouho trvá realizace projektu?",
+         "Doba realizace se liší podle rozsahu projektu. Malé zakázky lze obvykle dokončit během 2–3 dní. Rozsáhlejší projekty, jako například půdní vestavby, mohou trvat až několik týdnů. Rád s vámi projednám podrobnosti a připravím přesný harmonogram."),
 
+        ("Poskytuji cenovou nabídku zdarma?",
+         "Ano, nezávazná cenová nabídka je u mě samozřejmostí. Po úvodní konzultaci na místě a posouzení vašich požadavků připravím konkrétní kalkulaci, která zahrnuje vše potřebné."),
+
+        ("Jaké typy zakázek obvykle dostávám?",
+         "Mezi nejčastější zakázky, které realizuji, patří samozřejmě montáže sádrokartonových příček, podhledů a půdní vestavby. Rád však přijmu i vaše netradiční výzvy!"),
+
+         ("S jakými značkami mám zkušenosti?",
+         "Pracuji se všemi významnými značkami, jako jsou Rigips, Knauf a Lafarge. Na produkty Lafarge a Knauf mám navíc řádné školení, což zaručuje profesionální kvalitu práce."),
+
+        ("Nabízím nějaké speciální služby?",
+         "Ano, kromě běžných sádrokartonářských prací se specializuji na protipožární konstrukce a akustické izolace. Tyto systémy splňují přísné normy a jsou ideální pro zajištění bezpečnosti a pohodlí."),
+
+        ("Zajišťuji úklid po dokončení stavebních prací?",
+         "Ano, po dokončení zakázky provedu základní úklid, abyste mohli prostory okamžitě využívat. Případný odvoz odpadu je možné zajistit po předchozí dohodě."),
+
+        ("Kde působím?",
+         "Specializuji se na zakázky v plzeňském kraji, kde mám bohaté zkušenosti s realizacemi pro soukromé i komerční klienty. Pokud se nacházíte mimo tento region, můžete mě kontaktovat a domluvíme se na možnostech případné spolupráce."),
+
+        ("Kdy pracuji?",
+         "Standardně pracuji od pondělí do pátku. Pokud chcete realizovat projekt mimo tyto dny, například o víkendu či o svátcích, rád se vám pokusím vyjít vstříc po předchozí domluvě.")
+    };
 }
