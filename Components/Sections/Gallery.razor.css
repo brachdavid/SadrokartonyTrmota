@@ -1,0 +1,36 @@
+﻿.custom-close {
+    background-color: #f9d697;
+    border: none;
+    width: 30px;
+    height: 30px;
+    opacity: 1;
+    border-radius: 50%;
+    position: relative;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+    .custom-close::before,
+    .custom-close::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 16px;
+        height: 2px;
+        background-color: #000;
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .custom-close::after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    .custom-close:hover {
+        transform: scale(1.1);
+        background-color: #f2c185;
+    }
+
+    .custom-close:focus {
+        outline: none;
+        box-shadow: 0 0 5px #f9d697;
+    }
