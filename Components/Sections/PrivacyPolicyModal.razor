@@ -1,0 +1,31 @@
+﻿<a href="#" class="@LinkClass text-decoration-none" @onclick="OpenModal">@Text</a>
+
+@if (IsModalOpen)
+{
+    <div class="text-dark modal fade show d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.5);" @onclick="CloseModal">
+        <div class="modal-dialog modal-lg modal-dialog-centered" @onclick:stopPropagation>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Zásady ochrany osobních údajů</h5>
+                    <button type="button" class="btn-close" aria-label="Close" @onclick="CloseModal"></button>
+                </div>
+                <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
+                    <PrivacyPolicy />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="CloseModal">Zavřít</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public string Text { get; set; } = "Zásady ochrany osobních údajů";
+    [Parameter] public string LinkClass { get; set; } = "text-primary"; // Výchozí barva odkazu
+
+    private bool IsModalOpen = false;
+
+    private void OpenModal() => IsModalOpen = true;
+    private void CloseModal() => IsModalOpen = false;
+}

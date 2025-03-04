@@ -1,44 +1,45 @@
 ﻿@rendermode InteractiveServer
 
-<section id="galerie" class="px-lg-5 py-4">
-    <h2 class="h1 text-center">Fotogalerie</h2>
-    <div class="container mt-4">
-        <div class="row">
-            @foreach (var image in DisplayedImages)
+<section id="galerie" class="mt-5 mb-4">
+    <div class="container px-lg-5">
+        <h2 class="h1 text-center">Fotogalerie</h2>
+        <div class="container mt-4">
+            <div class="row">
+                @foreach (var image in DisplayedImages)
+                {
+                    <div class="col-md-4 col-sm-6 mb-3">
+                        <img src="@image" alt="Sadrokarton" class="img-fluid rounded shadow-sm"
+                             loading="lazy"
+                             style="cursor: pointer;" @onclick="(() => OpenModal(image))" />
+                    </div>
+                }
+            </div>
+            <!-- Tlačítko Načíst více -->
+            @if (DisplayedImages.Count < Images.Count)
             {
-                <div class="col-md-4 col-sm-6 mb-3">
-                    <img src="@image" alt="Sadrokarton" class="img-fluid rounded shadow-sm"
-                         loading="lazy"
-                         style="cursor: pointer;" @onclick="(() => OpenModal(image))" />
+                <div class="text-center p-2">
+                    <button class="btn btn-warning" @onclick="LoadMoreImages">Načíst více</button>
                 </div>
             }
         </div>
-        <!-- Tlačítko Načíst více -->
-        @if (DisplayedImages.Count < Images.Count)
+
+        <!-- Modální okno -->
+        @if (!string.IsNullOrEmpty(SelectedImage))
         {
-            <div class="text-center p-2">
-                <button class="btn btn-warning" @onclick="LoadMoreImages">Načíst více</button>
+            <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.8);"
+                 @onclick="CloseModal">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content bg-transparent border-0 position-relative" @onclick:stopPropagation="true">
+                        <!-- Zavírací tlačítko -->
+                        <button type="button" class="btn-close custom-close position-absolute top-0 end-0 m-3" aria-label="Close" @onclick="CloseModal"></button>
+
+                        <!-- Obrázek -->
+                        <img src="@SelectedImage" class="img-fluid rounded" alt="Full Image" loading="lazy" />
+                    </div>
+                </div>
             </div>
         }
     </div>
-
-    <!-- Modální okno -->
-    @if (!string.IsNullOrEmpty(SelectedImage))
-    {
-        <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.8);"
-             @onclick="CloseModal">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content bg-transparent border-0 position-relative" @onclick:stopPropagation="true">
-                    <!-- Zavírací tlačítko -->
-                    <button type="button" class="btn-close custom-close position-absolute top-0 end-0 m-3" aria-label="Close" @onclick="CloseModal"></button>
-
-                    <!-- Obrázek -->
-                    <img src="@SelectedImage" class="img-fluid rounded" alt="Full Image" loading="lazy" />
-                </div>
-            </div>
-        </div>
-    }
-
 </section>
 
 @code {

@@ -24,10 +24,10 @@ namespace SadrokartonyTrmota
             builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 
             builder.Services.AddAuthentication(options =>
-                {
-                    options.DefaultScheme = IdentityConstants.ApplicationScheme;
-                    options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-                })
+            {
+                options.DefaultScheme = IdentityConstants.ApplicationScheme;
+                options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+            })
                 .AddIdentityCookies();
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -69,14 +69,16 @@ namespace SadrokartonyTrmota
 
                 context.Response.Headers.Append("Content-Security-Policy",
                     $"default-src 'self'; " +
-                    $"script-src 'self' 'nonce-{nonce}'; " +
+                    $"script-src 'self' 'nonce-{nonce}' https://cdn.jsdelivr.net; " +
                     $"style-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; " +
                     $"img-src 'self' data: https://www.firmy.cz https://toplist.cz; " +
-                    $"connect-src 'self'; " +
+                    $"connect-src 'self' ws://localhost:* wss://localhost:* http://localhost:* https://localhost:* " +
+                    $"https://www.sadrokartonytrmota.cz ws://www.sadrokartonytrmota.cz wss://www.sadrokartonytrmota.cz; " +
                     $"font-src 'self' https://cdn.jsdelivr.net; " +
                     $"frame-src 'self' https://maps.google.com https://www.google.com; " +
                     $"object-src 'none'; " +
-                    $"base-uri 'self';");
+                    $"base-uri 'self'; " +
+                    $"frame-ancestors 'self';");
 
                 await next();
             });

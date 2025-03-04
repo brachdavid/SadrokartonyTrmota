@@ -9,10 +9,9 @@
                 <p class="mb-1 fw-bold">
                     <small> David Trmota <br />Zborovy 63, 34034 <br />IČO: 19508263 </small>
                 </p>
-                <p class=" mb-3">
-                    <a href="/zasady-ochrany-osobnich-udaju" class="text-decoration-none" @onclick="@(async () => NavigationManager.NavigateTo("/zasady-ochrany-osobnich-udaju", forceLoad: true))" style="color: #f9d697;">
-                        Zásady ochrany osobních údajů
-                    </a><br />
+                <p class="mb-3">
+                    <PrivacyPolicyModal Text="Zásady ochrany osobních údajů" LinkClass="text-warning" />
+                    <br />
                     Všechna práva vyhrazena. Kopírování obsahu bez souhlasu vlastníka je zakázáno.
                 </p>
 
@@ -48,6 +47,8 @@
         </div>
     </div>
 </footer>
+
+
 @code {
     private void Refresh()
     {
