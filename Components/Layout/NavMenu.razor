@@ -1,4 +1,4 @@
-﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-lg-2 bg-opacity-75 navbar-custom position-fixed z-3 w-100 top-0">
+﻿<nav id="my-navbar" class="navbar navbar-expand-lg navbar-dark bg-dark p-lg-2 bg-opacity-75 navbar-custom position-fixed z-3 w-100 top-0">
     <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="/" @onclick="@(async () => NavigationManager.NavigateTo("/", forceLoad: true))">
             <img src="/images/brand/logoST.png" alt="logo" class="logo" loading="lazy" />
@@ -12,22 +12,22 @@
         <div class="collapse navbar-collapse @(IsMenuOpen ? "show" : "")" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-center gap-lg-2">
                 <li class="nav-item">
-                    <a class="nav-link" href="#uvod" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Úvod</a>
+                    <NavLink class="nav-link" href="/#uvod" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Úvod</NavLink>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#o-mne" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">O mně</a>
+                    <NavLink class="nav-link" href="/#o-mne" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">O mně</NavLink>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#sluzby" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Služby</a>
+                    <NavLink class="nav-link" href="/#sluzby" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Služby</NavLink>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#kontakt" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Kontakt</a>
+                    <NavLink class="nav-link" href="/#kontakt" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Kontakt</NavLink>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#faq" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">FAQ</a>
+                    <NavLink class="nav-link" href="/#faq" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">FAQ</NavLink>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#galerie" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Galerie</a>
+                    <NavLink class="nav-link" href="/#galerie" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Galerie</NavLink>
                 </li>
                 <AuthorizeView>
                     <Authorized>
