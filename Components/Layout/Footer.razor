@@ -2,15 +2,15 @@
     <div class="container">
         <div class="row">
             <div class="text-center">
-                <a href=""><img src="/images/brand/logoST.png" alt="logo" class="mb-2" loading="lazy" style="height: 50px; cursor: pointer;" @onclick="@(async () => NavigationManager.NavigateTo("/", forceLoad: true))"></a>
+                <a href="/#uvod"><img src="/images/brand/logoST.png" alt="logo" class="mb-2" loading="lazy" style="height: 50px; cursor: pointer;"></a>
                 <p class="mb-1">
-                    &copy; 2024 <a href="" class="text-decoration-none link-light"><strong class="color" @onclick="@(async () => NavigationManager.NavigateTo("/", forceLoad: true))">Sádrokartony Trmota</strong></a><br />
+                    &copy; 2024 <a href="/#uvod" class="text-decoration-none link-light"><strong class="color">Sádrokartony Trmota</strong></a><br />
                 </p>
                 <p class="mb-1 fw-bold">
                     <small> David Trmota <br />Zborovy 63, 34034 <br />IČO: 19508263 </small>
                 </p>
                 <p class="mb-3">
-                    <PrivacyPolicyModal Text="Zásady ochrany osobních údajů" LinkClass="text-warning" />
+                    <PrivacyPolicyModal Text="Zásady ochrany osobních údajů" LinkClass="text-warning" @rendermode="InteractiveServer" />
                     <br />
                     Všechna práva vyhrazena. Kopírování obsahu bez souhlasu vlastníka je zakázáno.
                 </p>
@@ -47,11 +47,3 @@
         </div>
     </div>
 </footer>
-
-
-@code {
-    private void Refresh()
-    {
-        NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
-    }
-}

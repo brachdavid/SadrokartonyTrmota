@@ -1,15 +1,15 @@
 ﻿<nav id="my-navbar" class="navbar navbar-expand-lg navbar-dark bg-dark p-lg-2 navbar-custom position-fixed z-3 w-100 top-0" style="--bs-bg-opacity: .85;">
     <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" href="/" @onclick="@(async () => NavigationManager.NavigateTo("/", forceLoad: true))">
+        <a class="navbar-brand d-flex align-items-center" href="/#uvod">
             <img src="/images/brand/logoST.png" alt="logo" class="logo" loading="lazy" />
             <span class="d-none d-md-block px-md-3">Sádrokartony Trmota</span>
         </a>
 
-        <button class="navbar-toggler" type="button" @onclick="ToggleMenu" aria-controls="navbarNav" aria-expanded="@IsMenuOpen" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse @(IsMenuOpen ? "show" : "")" id="navbarNav">
+        <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-center gap-lg-2">
                 <li class="nav-item">
                     <NavLink class="nav-link" href="/#uvod" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Úvod</NavLink>
@@ -34,7 +34,7 @@
     </div>
 </nav>
 
-<style>    
+<style>
     .navbar-custom {
         backdrop-filter: blur(1px);
     }
@@ -59,13 +59,5 @@
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 5px;
         }
+
 </style>
-
-@code {
-    private bool IsMenuOpen = false;
-
-    private void ToggleMenu()
-    {
-        IsMenuOpen = !IsMenuOpen;
-    }
-}
