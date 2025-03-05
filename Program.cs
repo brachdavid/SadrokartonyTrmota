@@ -14,6 +14,7 @@ namespace SadrokartonyTrmota
                 .AddInteractiveServerComponents();
 
             builder.Services.AddHttpContextAccessor();
+            builder.Services.AddBlazorBootstrap();
 
             var app = builder.Build();
 
